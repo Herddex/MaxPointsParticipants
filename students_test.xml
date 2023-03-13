@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Entities>
+    <student ID="1">
+        <Nume>Numele</Nume>
+        <Grupa>422</Grupa>
+    </student>
+</Entities>
