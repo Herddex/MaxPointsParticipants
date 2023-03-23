@@ -13,12 +13,9 @@ import ro.ubb.validation.GradeValidator;
 import ro.ubb.validation.StudentValidator;
 import ro.ubb.validation.Validator;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.*;
 
-public class MainTest
+public class AddStudentTest
 {
 
     Validator<Student> studentValidator = new StudentValidator();
@@ -32,25 +29,19 @@ public class MainTest
     Service service = new Service(fileRepository1, fileRepository2, fileRepository3);
 
     @Test
-    public void shouldAnswerWithTrue()
-    {
-        assertTrue( true );
-    }
-
-    @Test
     void doesAddStudentWork(){
-        int isSuccessful = service.saveStudent("1", "Numele", 422);
+        int isSuccessful = service.saveStudent("1", "Name", 422);
         assertEquals(0, isSuccessful);
     }
 
     @Test
     void doesAddStudentWorkProperly(){
-        service.saveStudent("1", "Numele", 422);
+        service.saveStudent("1", "Name", 422);
         Iterable<Student> students = service.findAllStudents();
         Student student = students.iterator().next();
 
         assertEquals(student.getID(), "1");
-        assertEquals(student.getName(), "Numele");
+        assertEquals(student.getName(), "Name");
         assertEquals(student.getGroup(), 422);
     }
 }
