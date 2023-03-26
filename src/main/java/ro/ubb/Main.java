@@ -12,9 +12,9 @@ public class Main {
         Validator<Assignment> assignmentValidator = new AssignmentValidator();
         Validator<Grade> gradeValidator = new GradeValidator();
 
-        StudentXMLRepository fileRepository1 = new StudentXMLRepository(studentValidator, "students.xml");
-        AssignmentXMLRepository fileRepository2 = new AssignmentXMLRepository(assignmentValidator, "assignments.xml");
-        GradeXMLRepository fileRepository3 = new GradeXMLRepository(gradeValidator, "grades.xml");
+        StudentXMLRepository fileRepository1 = new StudentXMLRepository(studentValidator, "repos/src/students.xml");
+        AssignmentXMLRepository fileRepository2 = new AssignmentXMLRepository(assignmentValidator, "repos/src/assignments.xml");
+        GradeXMLRepository fileRepository3 = new GradeXMLRepository(gradeValidator, "repos/src/grades.xml");
 
         Service service = new Service(fileRepository1, fileRepository2, fileRepository3);
         UI console = new UI(service);
