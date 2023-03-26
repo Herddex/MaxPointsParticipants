@@ -18,6 +18,8 @@ import static org.junit.jupiter.api.Assertions.*;
 public class AddStudentTest
 {
 
+    public static final String NAME = "Name";
+    public static final String ID = "1";
     Validator<Student> studentValidator = new StudentValidator();
     Validator<Assignment> assignmentValidator = new AssignmentValidator();
     Validator<Grade> gradeValidator = new GradeValidator();
@@ -39,9 +41,6 @@ public class AddStudentTest
     }
 
     private void clearRepo(AbstractXMLRepository<String, ? extends HasID<String>> fileRepo){
-        if(!fileRepo.findAll().iterator().hasNext()){
-            return;
-        }
         for (HasID<String> item : fileRepo.findAll()) {
             fileRepo.delete(item.getID());
         }
@@ -49,48 +48,48 @@ public class AddStudentTest
 
     @Test // EC # 1
     void doesAddStudentWorkProperly(){
-        assertTrue(doesAddingStudentWork("1", "Numele", 422));
+        assertTrue(doesAddingStudentWork(ID, NAME, 422));
     }
 
     @Test // EC # 2
     void doesAddStudentValidateId(){
-        assertFalse(doesAddingStudentWork("", "Numele", 422));
+        assertFalse(doesAddingStudentWork("", NAME, 422));
     }
 
     @Test // EC # 3
     void doesAddStudentValidateName(){
-        assertFalse(doesAddingStudentWork("1", "", 422));
+        assertFalse(doesAddingStudentWork(ID, "", 422));
     }
 
     @Test // EC # 4
     void doesAddStudentValidateGroup(){
-        assertFalse(doesAddingStudentWork("1", "Numele", 9));
+        assertFalse(doesAddingStudentWork(ID, NAME, 9));
     }
 
     @Test // EC # 5
     void doesAddStudentValidateUniqueId(){
-        assertTrue(doesAddingStudentWork("1", "Numele", 422));
-        assertFalse(doesAddingStudentWork("1", "Numelele", 422));
+        assertTrue(doesAddingStudentWork(ID, NAME, 422));
+        assertFalse(doesAddingStudentWork(ID, NAME, 422));
     }
 
     @Test // BVA # 1
     void doesAddStudentKnowGroupBoundLowerOut(){
-        assertFalse(doesAddingStudentWork("1", "Numele", 110));
+        assertFalse(doesAddingStudentWork(ID, NAME, 110));
     }
 
     @Test // BVA # 2
     void doesAddStudentKnowGroupBoundLowerIn(){
-        assertTrue(doesAddingStudentWork("1", "Numele", 111));
+        assertTrue(doesAddingStudentWork(ID, NAME, 111));
     }
 
     @Test // BVA # 3
     void doesAddStudentKnowGroupBoundUpperOut(){
-        assertFalse(doesAddingStudentWork("1", "Numele", 938));
+        assertFalse(doesAddingStudentWork(ID, NAME, 938));
     }
 
     @Test // BVA # 4
     void doesAddStudentKnowGroupBoundUpperIn(){
-        assertTrue(doesAddingStudentWork("1", "Numele", 937));
+        assertTrue(doesAddingStudentWork(ID, NAME, 937));
     }
 
     private int getIteratorCnt(Iterator<?> iterator){
