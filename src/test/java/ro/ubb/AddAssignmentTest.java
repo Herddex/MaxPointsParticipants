@@ -48,7 +48,7 @@ public class AddAssignmentTest {
 
     @Test // EC # 1
     void doesAddAssignmentReturnOnSuccess(){
-        assertTrue(doesAddingAssignmentWork(ID, DESCRIPTION,1, 13));
+        assertTrue(doesAddingAssignmentWork(ID, DESCRIPTION,13, 1));
     }
 
     @Test // EC # 2
