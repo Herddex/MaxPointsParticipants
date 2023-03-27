@@ -98,8 +98,8 @@ public class AddStudentTest
             return false;
         }
 
-        Iterator<Student> students = service.findAllStudents().iterator();
-        int count = getIteratorCnt(students);
+        Iterator<Student> studentIterator = service.findAllStudents().iterator();
+        int count = getIteratorCnt(studentIterator);
         return count == prev_count + 1;
     }
 }

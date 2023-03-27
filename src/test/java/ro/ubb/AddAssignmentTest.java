@@ -48,8 +48,7 @@ public class AddAssignmentTest {
 
     @Test // EC # 1
     void doesAddAssignmentReturnOnSuccess(){
-        //TODO Fix
-        assertFalse(doesAddingAssignmentWork(ID, DESCRIPTION,13, 1));
+        assertTrue(doesAddingAssignmentWork(ID, DESCRIPTION,13, 1));
     }
 
     @Test // EC # 2
@@ -66,8 +65,8 @@ public class AddAssignmentTest {
             return false;
         }
 
-        Iterator<Student> students = service.findAllStudents().iterator();
-        int count = getIteratorCnt(students);
+        Iterator<Assignment> assignmentIterator = service.findAllAssignments().iterator();
+        int count = getIteratorCnt(assignmentIterator);
         return count == prev_count + 1;
     }
 }
