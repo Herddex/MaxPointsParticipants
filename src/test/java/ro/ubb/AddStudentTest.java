@@ -14,6 +14,7 @@ import ro.ubb.validation.Validator;
 import java.util.Iterator;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static ro.ubb.TestUtils.clearRepo;
 
 public class AddStudentTest
 {
@@ -38,12 +39,6 @@ public class AddStudentTest
     @AfterEach
     void tearDown() {
         clearRepo(studentXMLRepository);
-    }
-
-    private void clearRepo(AbstractXMLRepository<String, ? extends HasID<String>> fileRepo){
-        for (HasID<String> item : fileRepo.findAll()) {
-            fileRepo.delete(item.getID());
-        }
     }
 
     @Test // EC # 1
@@ -90,15 +85,6 @@ public class AddStudentTest
     @Test // BVA # 4
     void doesAddStudentKnowGroupBoundUpperIn(){
         assertTrue(doesAddingStudentWork(ID, NAME, 937));
-    }
-
-    private int getIteratorCnt(Iterator<?> iterator){
-        int count = 0;
-        while(iterator.hasNext()) {
-            iterator.next();
-            count++;
-        }
-        return count;
     }
 
     private boolean doesAddingStudentWork(String id, String name, int group){
