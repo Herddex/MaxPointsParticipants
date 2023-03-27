@@ -15,12 +15,14 @@ import java.util.Iterator;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static ro.ubb.TestUtils.clearRepo;
+import static ro.ubb.TestUtils.getIteratorCnt;
 
 public class AddStudentTest
 {
 
     public static final String NAME = "Name";
     public static final String ID = "1";
+
     Validator<Student> studentValidator = new StudentValidator();
     Validator<Assignment> assignmentValidator = new AssignmentValidator();
     Validator<Grade> gradeValidator = new GradeValidator();

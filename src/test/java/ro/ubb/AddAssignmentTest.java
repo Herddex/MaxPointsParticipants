@@ -23,6 +23,9 @@ import static ro.ubb.TestUtils.clearRepo;
 import static ro.ubb.TestUtils.getIteratorCnt;
 
 public class AddAssignmentTest {
+    public static final String ID = "1";
+    public static final String DESCRIPTION = "Descriere";
+
     Validator<Student> studentValidator = new StudentValidator();
     Validator<Assignment> assignmentValidator = new AssignmentValidator();
     Validator<Grade> gradeValidator = new GradeValidator();
@@ -44,13 +47,13 @@ public class AddAssignmentTest {
     }
 
     @Test // EC # 1
-    void doesAddAssignmentReturn1OnSuccess(){
-        assertTrue(doesAddingAssignmentWork());
+    void doesAddAssignmentReturnOnSuccess(){
+        assertTrue(doesAddingAssignmentWork(ID, DESCRIPTION,1, 13));
     }
 
     @Test // EC # 2
-    void doesAddAssignmentReturn0OnFail(){
-        assertFalse(doesAddingAssignmentWork());
+    void doesAddAssignmentReturnOnInvalid(){
+        assertFalse(doesAddingAssignmentWork("", DESCRIPTION, 1, 13));
     }
 
     private boolean doesAddingAssignmentWork(String id, String description, int deadline, int startWeek) {
