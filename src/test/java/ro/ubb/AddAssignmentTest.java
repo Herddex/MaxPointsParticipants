@@ -46,14 +46,15 @@ public class AddAssignmentTest {
         clearRepo(assignmentXMLRepository);
     }
 
-    @Test // EC # 1
+    @Test // S2 True coverage
     void doesAddAssignmentReturnOnSuccess(){
-        assertTrue(doesAddingAssignmentWork(ID, DESCRIPTION,13, 1));
+        assertTrue(doesAddingAssignmentWork(ID, DESCRIPTION, 13, 1));
     }
 
-    @Test // EC # 2
+    @Test // S2 False coverage
     void doesAddAssignmentReturnOnInvalid(){
         assertFalse(doesAddingAssignmentWork("", DESCRIPTION, 1, 13));
+        assertFalse(doesAddingAssignmentWork(ID, "", 1, 13));
     }
 
     private boolean doesAddingAssignmentWork(String id, String description, int deadline, int startWeek) {
