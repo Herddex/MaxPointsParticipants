@@ -15,11 +15,13 @@ import ro.ubb.validation.GradeValidator;
 import ro.ubb.validation.StudentValidator;
 import ro.ubb.validation.Validator;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static ro.ubb.TestUtils.clearGradesRepo;
 import static ro.ubb.TestUtils.clearRepo;
 
-public class AddAssignmentTest {
+public class AddEntitiesIntegrationTest {
+    public static final String ID_STUDENT = "230740239472";
+    public static final String ID_ASSIGNMENT = "235345";
     Validator<Student> studentValidator = new StudentValidator();
     Validator<Assignment> assignmentValidator = new AssignmentValidator();
     Validator<Grade> gradeValidator = new GradeValidator();
@@ -32,23 +34,39 @@ public class AddAssignmentTest {
 
     @BeforeEach
     void setUp() {
+        clearRepo(studentXMLRepository);
         clearRepo(assignmentXMLRepository);
+        clearGradesRepo(gradeXMLRepository);
     }
 
     @AfterEach
     void tearDown() {
+        clearRepo(studentXMLRepository);
         clearRepo(assignmentXMLRepository);
+        clearGradesRepo(gradeXMLRepository);
     }
 
-    @Test // S2 True coverage
-    void doesAddAssignmentReturnOnSuccess(){
+    @Test
+    void addStudentTest() {
+        assertTrue(TestUtils.doesAddingStudentWork(service, TestUtils.ID, TestUtils.NAME, 934));
+    }
+
+    @Test
+    void addAssignmentTest() {
         assertTrue(TestUtils.doesAddingAssignmentWork(service, TestUtils.ID, TestUtils.DESCRIPTION, 13, 1));
     }
 
-    @Test // S2 False coverage
-    void doesAddAssignmentReturnOnInvalid(){
-        assertFalse(TestUtils.doesAddingAssignmentWork(service, "", TestUtils.DESCRIPTION, 1, 13));
-        assertFalse(TestUtils.doesAddingAssignmentWork(service, TestUtils.ID, "", 1, 13));
+    @Test
+    void addGradeTest() {
+        studentXMLRepository.save(new Student(ID_STUDENT, "Test Student", 931));
+        assignmentXMLRepository.save(new Assignment(ID_ASSIGNMENT, "Test Assignment", 13, 12));
+        assertTrue(TestUtils.doesAddingGradeWork(service, ID_STUDENT, ID_ASSIGNMENT, 9.5, 13, TestUtils.DESCRIPTION));
     }
 
+    @Test
+    void addEntitiesTest() {
+        assertTrue(TestUtils.doesAddingStudentWork(service, ID_STUDENT, TestUtils.NAME, 934));
+        assertTrue(TestUtils.doesAddingAssignmentWork(service, ID_ASSIGNMENT, TestUtils.DESCRIPTION, 13, 1));
+        assertTrue(TestUtils.doesAddingGradeWork(service, ID_STUDENT, ID_ASSIGNMENT, 9.5, 1, TestUtils.DESCRIPTION));
+    }
 }
