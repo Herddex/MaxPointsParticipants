@@ -41,4 +41,12 @@ public class Grade implements HasID<Pair<String, String>> {
                 ", feedback = '" + feedback + '\'' +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Grade grade = (Grade) o;
+        return id.equals(grade.id);
+    }
 }
