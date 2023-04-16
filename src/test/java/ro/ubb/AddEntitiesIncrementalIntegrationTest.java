@@ -40,13 +40,13 @@ public class AddEntitiesIncrementalIntegrationTest {
     Service service;
 
     @Test
-    void addStudentTest() {
+    void addStudentTestIncremental() {
         when(studentXMLRepository.save(new Student(STUDENT_ID, STUDENT_NAME, STUDENT_GROUP))).thenReturn(null);
         assertEquals(1, service.saveStudent(STUDENT_ID, STUDENT_NAME, STUDENT_GROUP));
     }
 
     @Test
-    void addAssignmentTest() {
+    void addAssignmentTestIncremental() {
         when(studentXMLRepository.save(new Student(STUDENT_ID, STUDENT_NAME, STUDENT_GROUP))).thenReturn(null);
         assertEquals(1, service.saveStudent(STUDENT_ID, STUDENT_NAME, STUDENT_GROUP));
 
@@ -58,7 +58,7 @@ public class AddEntitiesIncrementalIntegrationTest {
     }
 
     @Test
-    void addGradeTest() {
+    void addGradeTestIncremental() {
         Student student = new Student(STUDENT_ID, STUDENT_NAME, STUDENT_GROUP);
         when(studentXMLRepository.save(student)).thenReturn(null);
         assertEquals(1, service.saveStudent(STUDENT_ID, STUDENT_NAME, STUDENT_GROUP));
